@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Trial MyShop</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      .header {
+        background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+        padding: 40px 30px;
+        text-align: center;
+        color: white;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      .header p {
+        margin: 10px 0 0 0;
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .content {
+        padding: 40px 30px;
+      }
+      .greeting {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .code-box {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border: 3px dashed #3b82f6;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        margin: 30px 0;
+      }
+      .code-label {
+        font-size: 14px;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+      .code-value {
+        font-size: 36px;
+        font-weight: bold;
+        color: #1e40af;
+        font-family: "Courier New", monospace;
+        letter-spacing: 3px;
+        margin: 10px 0;
+        word-break: break-all;
+      }
+      .expiry {
+        font-size: 14px;
+        color: #ef4444;
+        margin-top: 10px;
+        font-weight: 600;
+      }
+      .info-box {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+      .info-box h3 {
+        margin: 0 0 10px 0;
+        color: #92400e;
+        font-size: 16px;
+      }
+      .steps {
+        margin: 20px 0;
+      }
+      .step {
+        display: flex;
+        margin: 15px 0;
+        align-items: flex-start;
+      }
+      .step-number {
+        background: #3b82f6;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+        margin-right: 15px;
+      }
+      .step-text {
+        color: #475569;
+        line-height: 1.6;
+      }
+      .features {
+        background: #f1f5f9;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+      .feature {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        color: #334155;
+      }
+      .feature::before {
+        content: "✓";
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: #10b981;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 24px;
+        margin-right: 12px;
+        font-weight: bold;
+      }
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        padding: 15px 40px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      }
+      .footer {
+        background: #1e293b;
+        color: #94a3b8;
+        padding: 30px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .footer a {
+        color: #60a5fa;
+        text-decoration: none;
+      }
+      .company-info {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎁 Chào Mừng Đến Với MyShop!</h1>
+        <p>Code Trial Của Bạn Đã Sẵn Sàng</p>
+      </div>
+
+      <div class="content">
+        <div class="greeting">Xin chào <strong>{{nameCompany}}</strong>,</div>
+
+        <p style="color: #475569; line-height: 1.8">
+          Cảm ơn bạn đã quan tâm đến <strong>MyShop Admin Portal</strong>! Chúng
+          tôi rất vui được gửi đến bạn <strong>Code Trial miễn phí</strong> để
+          trải nghiệm đầy đủ tính năng trong <strong>15 ngày</strong>.
+        </p>
+
+        <div class="code-box">
+          <div class="code-label">Code Trial Của Bạn</div>
+          <div class="code-value">{{trialCode}}</div>
+          <div class="expiry">⏰ Có hiệu lực đến: {{expiryDate}}</div>
+        </div>
+
+        <div class="info-box">
+          <h3>⚠️ Lưu Ý Quan Trọng</h3>
+          <ul style="margin: 10px 0; padding-left: 20px; color: #92400e">
+            <li>
+              Mỗi người chỉ được nhận <strong>1 code trial duy nhất</strong>
+            </li>
+            <li>
+              Code sẽ hết hạn sau <strong>15 ngày</strong> kể từ ngày kích hoạt
+            </li>
+            <li>Vui lòng giữ code này bảo mật và không chia sẻ</li>
+          </ul>
+        </div>
+
+        <div class="steps">
+          <h3 style="color: #1e293b; margin-bottom: 20px">
+            📝 Hướng Dẫn Kích Hoạt
+          </h3>
+
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <strong>Tải ứng dụng MyShop</strong><br />
+              Download và cài đặt ứng dụng từ website chính thức
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <strong>Đăng ký tài khoản</strong><br />
+              Tạo tài khoản mới hoặc đăng nhập nếu đã có
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <strong>Nhập code kích hoạt</strong><br />
+              Vào mục "Kích hoạt", nhập code trial ở trên
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <strong>Bắt đầu sử dụng</strong><br />
+              Khám phá tất cả tính năng trong 15 ngày!
+            </div>
+          </div>
+        </div>
+
+        <div class="features">
+          <h3 style="color: #1e293b; margin-bottom: 15px">
+            ✨ Tính Năng Trial Bao Gồm
+          </h3>
+          <div class="feature">Quản lý sản phẩm không giới hạn</div>
+          <div class="feature">Báo cáo doanh thu chi tiết</div>
+          <div class="feature">Quản lý khách hàng</div>
+          <div class="feature">Thống kê và phân tích</div>
+          <div class="feature">Hỗ trợ qua email</div>
+        </div>
+
+        <center>
+          <a href="{{downloadLink}}" class="cta-button">
+            ⬇️ Tải Ứng Dụng Ngay
+          </a>
+        </center>
+
+        <p
+          style="
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+          "
+        >
+          💡 <strong>Muốn nâng cấp lên Premium?</strong><br />
+          Liên hệ với chúng tôi hoặc truy cập website để mua code Premium và sử
+          dụng <strong>không giới hạn thời gian</strong> với nhiều tính năng độc
+          quyền!
+        </p>
+      </div>
+
+      <div class="footer">
+        <strong style="color: white; font-size: 16px">MyShop 2025</strong>
+        <p style="margin: 10px 0">Giải pháp quản lý shop toàn diện</p>
+
+        <div style="margin: 20px 0">
+          <a href="mailto:support@myshop.vn">📧 support@myshop.vn</a> |
+          <a href="tel:+84123456789">📞 +84 123 456 789</a>
+        </div>
+
+        <div class="company-info">
+          <p>© 2025 MyShop. All rights reserved.</p>
+          <p style="font-size: 12px; margin-top: 10px">
+            Email này được gửi đến: <strong>{{email}}</strong><br />
+            Nếu bạn không yêu cầu code này, vui lòng bỏ qua email.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

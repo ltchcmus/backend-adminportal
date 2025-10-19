@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Premium MyShop</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      .header {
+        background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+        padding: 40px 30px;
+        text-align: center;
+        color: white;
+        position: relative;
+      }
+      .header::before {
+        content: "💎";
+        font-size: 60px;
+        position: absolute;
+        top: -10px;
+        right: 30px;
+        opacity: 0.3;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      .header p {
+        margin: 10px 0 0 0;
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .badge {
+        display: inline-block;
+        background: white;
+        color: #ea580c;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+      .content {
+        padding: 40px 30px;
+      }
+      .greeting {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .success-box {
+        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        border: 3px solid #22c55e;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        margin: 25px 0;
+      }
+      .success-icon {
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+      .success-message {
+        color: #166534;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .code-box {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border: 3px dashed #f59e0b;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        margin: 30px 0;
+      }
+      .code-label {
+        font-size: 14px;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+      .code-value {
+        font-size: 36px;
+        font-weight: bold;
+        color: #b45309;
+        font-family: "Courier New", monospace;
+        letter-spacing: 3px;
+        margin: 10px 0;
+        word-break: break-all;
+      }
+      .lifetime-badge {
+        background: #16a34a;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .transaction-info {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+      }
+      .transaction-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .transaction-row:last-child {
+        border-bottom: none;
+      }
+      .transaction-label {
+        color: #64748b;
+      }
+      .transaction-value {
+        color: #1e293b;
+        font-weight: 600;
+      }
+      .steps {
+        margin: 20px 0;
+      }
+      .step {
+        display: flex;
+        margin: 15px 0;
+        align-items: flex-start;
+      }
+      .step-number {
+        background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+        margin-right: 15px;
+      }
+      .step-text {
+        color: #475569;
+        line-height: 1.6;
+      }
+      .features {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        padding: 25px;
+        border-radius: 15px;
+        margin: 25px 0;
+        border: 2px solid #fbbf24;
+      }
+      .features h3 {
+        color: #92400e;
+        margin: 0 0 20px 0;
+        text-align: center;
+        font-size: 20px;
+      }
+      .feature {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+        color: #78350f;
+      }
+      .feature::before {
+        content: "⭐";
+        display: inline-block;
+        margin-right: 12px;
+        font-size: 20px;
+      }
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+        color: white;
+        padding: 15px 40px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+      }
+      .support-box {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        margin: 25px 0;
+      }
+      .support-box h3 {
+        margin: 0 0 15px 0;
+      }
+      .support-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .support-link {
+        background: white;
+        color: #2563eb;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .footer {
+        background: #1e293b;
+        color: #94a3b8;
+        padding: 30px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .footer a {
+        color: #fbbf24;
+        text-decoration: none;
+      }
+      .company-info {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎉 Thanh Toán Thành Công!</h1>
+        <p>Chào Mừng Đến Với MyShop Premium</p>
+        <span class="badge">🌟 PREMIUM MEMBER</span>
+      </div>
+
+      <div class="content">
+        <div class="success-box">
+          <div class="success-icon">✅</div>
+          <div class="success-message">
+            Giao dịch đã được xác nhận thành công!
+          </div>
+        </div>
+
+        <div class="greeting">Xin chào <strong>{{nameCompany}}</strong>,</div>
+
+        <p style="color: #475569; line-height: 1.8">
+          Cảm ơn bạn đã tin tưởng và lựa chọn
+          <strong>MyShop Admin Portal Premium</strong>! Bạn giờ đây có quyền
+          truy cập <strong>vĩnh viễn</strong> vào tất cả các tính năng cao cấp
+          của chúng tôi.
+        </p>
+
+        <div class="transaction-info">
+          <h3 style="color: #1e293b; margin: 0 0 15px 0">
+            📋 Thông Tin Giao Dịch
+          </h3>
+          <div class="transaction-row">
+            <span class="transaction-label">Mã đơn hàng:</span>
+            <span class="transaction-value">{{orderId}}</span>
+          </div>
+          <div class="transaction-row">
+            <span class="transaction-label">Sản phẩm:</span>
+            <span class="transaction-value">Code Premium</span>
+          </div>
+          <div class="transaction-row">
+            <span class="transaction-label">Số tiền:</span>
+            <span
+              class="transaction-value"
+              style="color: #ea580c; font-size: 18px"
+              >{{amount}} VNĐ</span
+            >
+          </div>
+          <div class="transaction-row">
+            <span class="transaction-label">Thời gian:</span>
+            <span class="transaction-value">{{transactionDate}}</span>
+          </div>
+        </div>
+
+        <div class="code-box">
+          <div class="code-label">🔑 Code Premium Của Bạn</div>
+          <div class="code-value">{{premiumCode}}</div>
+          <span class="lifetime-badge">♾️ VĨNH VIỄN</span>
+        </div>
+
+        <div class="steps">
+          <h3 style="color: #1e293b; margin-bottom: 20px">
+            📝 Hướng Dẫn Kích Hoạt
+          </h3>
+
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <strong>Tải ứng dụng MyShop</strong><br />
+              Download và cài đặt ứng dụng từ website chính thức
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <strong>Đăng nhập hoặc đăng ký</strong><br />
+              Sử dụng email này để đăng nhập: <strong>{{email}}</strong>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <strong>Kích hoạt Premium</strong><br />
+              Vào mục "Nâng cấp Premium", nhập code ở trên
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <strong>Tận hưởng Premium!</strong><br />
+              Khám phá tất cả tính năng cao cấp ngay bây giờ!
+            </div>
+          </div>
+        </div>
+
+        <div class="features">
+          <h3>✨ Tính Năng Premium Bao Gồm</h3>
+          <div class="feature">Sử dụng vĩnh viễn, không giới hạn thời gian</div>
+          <div class="feature">Quản lý sản phẩm & kho hàng không giới hạn</div>
+          <div class="feature">
+            Báo cáo doanh thu nâng cao & phân tích chi tiết
+          </div>
+          <div class="feature">Quản lý nhiều chi nhánh</div>
+          <div class="feature">Xuất dữ liệu Excel/PDF</div>
+          <div class="feature">Tùy chỉnh giao diện theo thương hiệu</div>
+          <div class="feature">Backup tự động hàng ngày</div>
+          <div class="feature">API tích hợp với hệ thống khác</div>
+          <div class="feature">Hỗ trợ ưu tiên 24/7</div>
+          <div class="feature">Cập nhật miễn phí mãi mãi</div>
+        </div>
+
+        <center>
+          <a href="{{downloadLink}}" class="cta-button">
+            ⬇️ Tải Ứng Dụng Ngay
+          </a>
+        </center>
+
+        <div class="support-box">
+          <h3>💬 Cần Hỗ Trợ?</h3>
+          <p style="margin: 0 0 15px 0; opacity: 0.9">
+            Đội ngũ Premium Support luôn sẵn sàng hỗ trợ bạn 24/7
+          </p>
+          <div class="support-links">
+            <a href="mailto:support@myshop.vn" class="support-link">📧 Email</a>
+            <a href="tel:+84123456789" class="support-link">📞 Hotline</a>
+            <a href="#" class="support-link">💬 Live Chat</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <strong style="color: white; font-size: 16px">MyShop 2025</strong>
+        <p style="margin: 10px 0">Giải pháp quản lý shop toàn diện</p>
+
+        <div style="margin: 20px 0">
+          <a href="mailto:support@myshop.vn">📧 support@myshop.vn</a> |
+          <a href="tel:+84123456789">📞 +84 123 456 789</a>
+        </div>
+
+        <div class="company-info">
+          <p>© 2025 MyShop. All rights reserved.</p>
+          <p style="font-size: 12px; margin-top: 10px">
+            Email này được gửi đến: <strong>{{email}}</strong><br />
+            Cảm ơn bạn đã trở thành thành viên Premium!
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

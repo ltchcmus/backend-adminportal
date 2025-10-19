@@ -1,0 +1,74 @@
+# Backend Configuration File
+# MyShop Admin Portal Backend
+
+# Server Configuration
+server:
+  port: 3000
+  host: localhost
+  baseUrl: http://localhost:3000
+  adminPortalUrl: http://localhost:5173
+
+# Database Configuration
+database:
+  url: ${DATABASE_URL}
+  pool:
+    max: 20
+    idleTimeoutMillis: 30000
+    connectionTimeoutMillis: 2000
+
+# External API Configuration
+externalApi:
+  # Server thứ 2 để generate token (để trống sẽ dùng generate-code-test)
+  baseUrl: ""
+  generateTrialTokenEndpoint: "/api/v1/auth/generate-token-trial"
+  generatePremiumTokenEndpoint: "/api/v1/auth/generate-token-premium"
+  validateTokenEndpoint: "/api/v1/auth/validate-token"
+  timeout: 5000
+
+# Email Configuration (Brevo)
+email:
+  provider: brevo
+  apiKey: ${BREVO_API_KEY}
+  apiUrl: https://api.brevo.com/v3/smtp/email
+  sender:
+    name: ${EMAIL_SENDER_NAME}
+    email: ${EMAIL_SENDER_EMAIL}
+  templates:
+    trialCode: ./src/templates/email-trial.html
+    premiumCode: ./src/templates/email-premium.html
+
+# MoMo Payment Configuration
+payment:
+  momo:
+    partnerCode: MOMO
+    accessKey: F8BBA842ECF85
+    secretKey: K951B6PE1waDMi640xX08PD3vg6EkVlz
+    apiUrl: https://test-payment.momo.vn/v2/gateway/api
+    requestType: captureWallet
+    orderInfo: Mua Code Premium MyShop
+    lang: vi
+    redirectUrl: ${server.baseUrl}/callback-momo/redirect
+    ipnUrl: ${server.baseUrl}/callback-momo/ipn-url
+
+# Code Configuration
+codes:
+  trial:
+    expiryDays: 15
+    maxPerUser: 1 # Giới hạn 1 trial code per CCCD
+  premium:
+    expiryDays: null # Vĩnh viễn
+    defaultPrice: 199000
+  enterprise:
+    expiryDays: null
+    contactForPrice: true
+
+# Security
+security:
+  rateLimiting:
+    enabled: true
+    maxRequestsPerMinute: 60
+  cors:
+    enabled: true
+    origins:
+      - http://localhost:5173
+      - http://localhost:3000
