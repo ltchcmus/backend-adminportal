@@ -34,18 +34,28 @@ const config = loadConfig();
 
 const app = express();
 const PORT = config.server.port || process.env.PORT || 3000;
+
+// Priority: environment variable > config.yaml > default
 const ADMIN_PORTAL_URL =
-  config.server.adminPortalUrl ||
   process.env.ADMIN_PORTAL_URL ||
+  config.server.adminPortalUrl ||
   "http://localhost:5173";
 
 const SERVER_BASE_URL =
-  config.server.baseUrl ||
   process.env.SERVER_BASE_URL ||
+  config.server.baseUrl ||
   `http://localhost:${PORT}`;
+
+console.log('🌐 Server Configuration:');
+console.log('   SERVER_BASE_URL:', SERVER_BASE_URL);
+console.log('   ADMIN_PORTAL_URL:', ADMIN_PORTAL_URL);
 
 const urlCallbackRedirect = `${SERVER_BASE_URL}/callback-momo/redirect`;
 const urlCallbackIpnUrl = `${SERVER_BASE_URL}/callback-momo/ipn-url`;
+
+console.log('💳 MoMo Callbacks:');
+console.log('   Redirect URL:', urlCallbackRedirect);
+console.log('   IPN URL:', urlCallbackIpnUrl);
 
 app.use(cors());
 app.use(express.json());

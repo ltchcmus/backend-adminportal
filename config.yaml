@@ -5,8 +5,8 @@
 server:
   port: 3000
   host: localhost
-  baseUrl: http://localhost:3000
-  adminPortalUrl: http://localhost:5173
+  baseUrl: ${SERVER_BASE_URL}
+  adminPortalUrl: ${ADMIN_PORTAL_URL}
 
 # Database Configuration
 database:
