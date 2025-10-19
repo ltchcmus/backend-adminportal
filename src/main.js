@@ -361,33 +361,16 @@ app.get("/callback-momo/redirect", async (req, res) => {
   const { orderId, resultCode, message, transId, amount } = req.query;
 
   try {
-    const transaction = await getTransactionByOrderId(orderId);
-
-    if (!transaction) {
-      return res.redirect(
-        `${ADMIN_PORTAL_URL}/payment-error?error=transaction_not_found`
-      );
-    }
-
-    // Check payment result
-    if (resultCode !== '0') {
-      // Payment failed or cancelled
-      return res.redirect(
-        `${ADMIN_PORTAL_URL}/payment-error?error=payment_failed&message=${encodeURIComponent(message)}`
-      );
-    }
-
-    // Just redirect to success page - code already created by IPN
+    // Always redirect to success page regardless of payment result
+    // The actual code creation and email sending is handled by IPN endpoint
     return res.redirect(
       `${ADMIN_PORTAL_URL}/payment-success?orderId=${orderId}&transId=${
         transId || "TEST"
-      }&amount=${amount}`
+      }&amount=${amount}&resultCode=${resultCode}`
     );
   } catch (error) {
     return res.redirect(
-      `${ADMIN_PORTAL_URL}/payment-error?error=processing_error&message=${encodeURIComponent(
-        error.message
-      )}`
+      `${ADMIN_PORTAL_URL}/payment-success?orderId=${orderId || "unknown"}`
     );
   }
 });
