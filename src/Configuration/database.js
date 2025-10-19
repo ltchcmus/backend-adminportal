@@ -10,6 +10,12 @@ const dbUrl = process.env.DATABASE_URL || "NOT_SET";
 const maskedUrl = dbUrl.replace(/:([^@]+)@/, ":****@");
 console.log("🔍 Database URL:", maskedUrl);
 
+// Check if DATABASE_URL is properly set
+if (!process.env.DATABASE_URL) {
+  console.error("❌ DATABASE_URL environment variable is not set!");
+  process.exit(1);
+}
+
 // Database connection configuration
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,

@@ -4,8 +4,13 @@ import path from "path";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
-// Load environment variables first
-dotenv.config();
+// Load environment variables first (only if .env file exists)
+if (fs.existsSync(path.join(process.cwd(), '.env'))) {
+  dotenv.config();
+  console.log('📄 Loaded .env file for local development');
+} else {
+  console.log('🔧 Using environment variables from system (production mode)');
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,17 +27,17 @@ const replacePlaceholders = (obj, context = config) => {
     return obj.replace(/\$\{([^}]+)\}/g, (match, path) => {
       const keys = path.split(".");
       let value = context;
-      
+
       // First try to get from config
       for (const key of keys) {
         value = value?.[key];
       }
-      
+
       // If not found in config, try environment variables
       if (value === undefined) {
         value = process.env[path];
       }
-      
+
       return value !== undefined ? value : match;
     });
   }

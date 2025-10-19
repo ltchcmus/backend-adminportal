@@ -1,0 +1,38 @@
+# Render Blueprint
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: myshop-admin-portal-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/main.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SERVER_BASE_URL
+        sync: false # Will be set manually in Render dashboard
+      - key: ADMIN_PORTAL_URL
+        sync: false # Will be set manually in Render dashboard
+      - key: DATABASE_URL
+        sync: false # Will be set manually in Render dashboard
+      - key: BREVO_API_KEY
+        sync: false # Will be set manually in Render dashboard
+      - key: EMAIL_SENDER_NAME
+        value: MyShop2025
+      - key: EMAIL_SENDER_EMAIL
+        sync: false # Will be set manually in Render dashboard
+      - key: MOMO_PARTNER_CODE
+        value: MOMO
+      - key: MOMO_ACCESS_KEY
+        value: F8BBA842ECF85
+      - key: MOMO_SECRET_KEY
+        value: K951B6PE1waDMi640xX08PD3vg6EkVlz
+      - key: PREMIUM_PRICE
+        value: 199000
+      - key: TRIAL_EXPIRY_DAYS
+        value: 15
