@@ -369,42 +369,19 @@ app.get("/callback-momo/redirect", async (req, res) => {
       );
     }
 
-    await updateTransactionStatus(orderId, "success", {
-      transId,
-      resultCode,
-      message,
-      testMode: true,
-    });
-
-    const paymentData = transaction.payment_data;
-
-    const tokenResponse = await generatePremiumToken(
-      paymentData.nameCompany,
-      paymentData.email,
-      paymentData.cccd
-    );
-
-    const tokenPremium = tokenResponse.tokenPremium || tokenResponse.token;
-    const code = await createPremiumCode(transaction.user_id, tokenPremium);
-    await linkCodeToTransaction(orderId, code.id);
-
-    try {
-      await sendPremiumCodeEmail({
-        email: paymentData.email,
-        nameCompany: paymentData.nameCompany,
-        premiumCode: code.code,
-        orderId: orderId,
-        amount: amount,
-        transactionDate: new Date().toLocaleString("vi-VN"),
-      });
-    } catch (emailError) {
-      // Continue even if email fails
+    // Check payment result
+    if (resultCode !== '0') {
+      // Payment failed or cancelled
+      return res.redirect(
+        `${ADMIN_PORTAL_URL}/payment-error?error=payment_failed&message=${encodeURIComponent(message)}`
+      );
     }
 
+    // Just redirect to success page - code already created by IPN
     return res.redirect(
       `${ADMIN_PORTAL_URL}/payment-success?orderId=${orderId}&transId=${
         transId || "TEST"
-      }&amount=${amount}&code=${code.code}`
+      }&amount=${amount}`
     );
   } catch (error) {
     return res.redirect(
