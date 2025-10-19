@@ -5,11 +5,11 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
 // Load environment variables first (only if .env file exists)
-if (fs.existsSync(path.join(process.cwd(), '.env'))) {
+if (fs.existsSync(path.join(process.cwd(), ".env"))) {
   dotenv.config();
-  console.log('📄 Loaded .env file for local development');
+  console.log("📄 Loaded .env file for local development");
 } else {
-  console.log('🔧 Using environment variables from system (production mode)');
+  console.log("🔧 Using environment variables from system (production mode)");
 }
 
 const __filename = fileURLToPath(import.meta.url);
